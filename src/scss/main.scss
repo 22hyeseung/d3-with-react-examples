@@ -1,6 +1,8 @@
 @import 'base/reset';
 @import 'base/typography';
 
+@import 'utils/variables';
+
 .App {
-  background-color: cornsilk;
+  background-color: #f7f7f7;
 }
