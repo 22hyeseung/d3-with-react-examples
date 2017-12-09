@@ -46,7 +46,8 @@
   "scripts": {
     "start": "NODE_PATH=src node scripts/start.js",
     "build": "NODE_PATH=src node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "server": "json-server --watch data.json --port 3001"
   },
   "jest": {
     "collectCoverageFrom": ["src/**/*.{js,jsx,mjs}"],
@@ -84,6 +85,7 @@
     "extends": "react-app"
   },
   "devDependencies": {
+    "json-server": "^0.12.1",
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.6"
   }
