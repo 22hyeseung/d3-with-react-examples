@@ -55,7 +55,7 @@ class SubContainer extends Component {
           }}
         />
         <LineGraph
-          data={[0, 1, 2, 3, 4, 5]}
+          data={this.props.data}
           width={190}
           height={53.3}
           size={[190, 53.3]}
