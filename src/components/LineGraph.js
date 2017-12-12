@@ -6,11 +6,10 @@ import { extent } from 'd3-array'
 import { axisBottom, axisLeft } from 'd3-axis'
 import { line } from 'd3-shape'
 import PropTypes from 'prop-types'
-import 'scss/components/lineGraph.scss'
+import 'scss/components/graph.scss'
 import Map from 'lodash/map'
 
 const LineGraph = props => {
-  // const node = this.node
   const dataKey = props.dataKey
   let chartData = []
   Map(props.data, (el, i) => {
@@ -52,13 +51,17 @@ const LineGraph = props => {
 
   return (
     <svg
-      className="Graph-container"
+      className={props.main ? 'Graph-main-container' : 'Graph-sub-container'}
       width={props.width + props.margin.left + props.margin.right}
       height={props.height + props.margin.top + props.margin.bottom}
     >
-      <text x="0" y="-35" fontSize="1.5rem">
-        {props.dataKey}
-      </text>
+      {props.main ? (
+        <text x="0" y="-35" fontSize="1.5rem">
+          {props.dataKey}
+        </text>
+      ) : (
+        <text />
+      )}
       {/* x축 */}
       <g
         className="xAxis"

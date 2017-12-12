@@ -1,12 +1,15 @@
 import React from 'react'
-import SubLineGraph from 'components/SubLineGraph'
+import LineGraph from 'components/LineGraph'
+import 'scss/main.scss'
 
 const SubContainer = props => {
   return (
-    <div>
+    <div className="App-sub-container">
       {props.dataKey.map((el, i) => {
         return (
-          <SubLineGraph
+          <LineGraph
+            className="App-sub-item"
+            main={false}
             key={i}
             data={props.data}
             selectX={data => data.timestamp}

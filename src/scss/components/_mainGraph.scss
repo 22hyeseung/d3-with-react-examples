@@ -1,41 +1,41 @@
 @import '../utils/variables';
 
-.subGraph-container {
+.Graph-main-container {
   background: #fff;
   box-shadow: $box-shadow;
-  padding: 1.5rem 0rem 0rem 2rem;
-  margin: -2rem -2rem 2rem 3.6rem;
+  padding: 5rem 0rem 2.5rem 3.5rem;
+  // margin: 3rem;
   .xAxis {
     line {
       stroke: $deep-dark-gray;
-      stroke-width: $sub-stroke-width;
+      stroke-width: $main-stroke-width;
     }
     path {
       stroke: $deep-dark-gray;
-      stroke-width: $sub-stroke-width;
+      stroke-width: $main-stroke-width;
     }
     text {
-      font-size: $sub-font-size;
+      font-size: $main-font-size;
     }
   }
   .yAxis {
     line {
       stroke: $deep-dark-gray;
-      stroke-width: $sub-stroke-width;
+      stroke-width: $main-stroke-width;
     }
     path {
       stroke: $deep-dark-gray;
-      stroke-width: $sub-stroke-width;
+      stroke-width: $main-stroke-width;
     }
     text {
-      font-size: $sub-font-size;
+      font-size: $main-font-size;
     }
   }
   .line {
     path {
       fill: transparent;
       stroke: $primary-color;
-      stroke-width: $main-stroke-width;
+      stroke-width: 1.8;
     }
   }
 }

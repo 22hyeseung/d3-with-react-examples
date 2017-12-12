@@ -4,5 +4,18 @@
 @import 'utils/variables';
 
 .App {
+  display: grid;
+  width: 100%;
   background-color: #f7f7f7;
+}
+
+.App-main-container {
+  margin: 3rem;
+  justify-self: center;
+}
+
+.App-sub-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 0 3rem 3rem 3rem;
 }
