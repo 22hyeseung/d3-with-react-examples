@@ -51,6 +51,8 @@ const LineGraph = props => {
 
   return (
     <svg
+      // 서브 그래프인 경우에만 click 이벤트 동작
+      onClick={props.main ? null : () => props.changeMainGraph(props.dataKey)}
       className={props.main ? 'Graph-main-container' : 'Graph-sub-container'}
       width={props.width + props.margin.left + props.margin.right}
       height={props.height + props.margin.top + props.margin.bottom}

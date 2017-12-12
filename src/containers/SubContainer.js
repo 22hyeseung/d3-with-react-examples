@@ -5,16 +5,16 @@ import 'scss/main.scss'
 const SubContainer = props => {
   return (
     <div className="App-sub-container">
-      {props.dataKey.map((el, i) => {
+      {props.dataKeys.map((dataKey, i) => {
         return (
           <LineGraph
-            className="App-sub-item"
+            changeMainGraph={props.changeMainGraph}
             main={false}
             key={i}
             data={props.data}
             selectX={data => data.timestamp}
-            selectY={data => data[el]}
-            dataKey={el}
+            selectY={data => data[dataKey]}
+            dataKey={dataKey}
             width={145}
             height={60}
             margin={{

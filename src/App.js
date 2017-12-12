@@ -5,6 +5,7 @@ import SubContainer from 'containers/SubContainer'
 import './scss/main.scss'
 import PickBy from 'lodash/pickBy'
 import Map from 'lodash/map'
+import MapValues from 'lodash/mapValues'
 
 class App extends Component {
   constructor(props) {
@@ -42,9 +43,13 @@ class App extends Component {
 
   // 서브 그래프에서 클릭 이벤트 발생 시 mainData 변경
   changeMainGraph = keyName => {
-    this.setState({
-      mainData: keyName,
+    // false로 전체 value 초기화
+    const isMain = MapValues(this.state.isMain, val => {
+      return false
     })
+    // 클릭한 그래프를 true로
+    isMain[keyName] = true
+    console.log(isMain)
   }
 
   render() {
@@ -90,7 +95,11 @@ class App extends Component {
     return (
       <div className="App">
         <MainContainer data={flatData} dataKey={mainDataKey} />
-        <SubContainer data={flatData} dataKey={subDataKeys} />
+        <SubContainer
+          data={flatData}
+          dataKeys={subDataKeys}
+          changeMainGraph={this.changeMainGraph}
+        />
       </div>
     )
   }
