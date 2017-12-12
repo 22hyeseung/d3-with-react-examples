@@ -6,4 +6,21 @@ $point-color: #f9a825;
 
 $background-color: #f7f7f7;
 $dark-gray: darken($background-color, 20%);
+$deep-dark-gray: darken($dark-gray, 20%);
 $linght-gray: lighten($background-color, 20%);
+
+// font-size
+$h1: 1.5rem;
+$h2: $h1 - 0.25rem;
+$h3: $h2 - 0.25rem;
+$h4: $h3 - 0.25rem;
+
+$main-font-size: 0.875rem;
+$sub-font-size: 0.25rem;
+
+// stroke-width
+$main-stroke-width: 0.8;
+$sub-stroke-width: $main-stroke-width/2;
+
+// shadow
+$box-shadow: 1.5px 2.5px 8px $dark-gray;

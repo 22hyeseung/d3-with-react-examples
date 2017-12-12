@@ -1,0 +1,10 @@
+@import '../utils/variables';
+
+.Main-container {
+  overflow: hidden;
+  text-align: center;
+  h1 {
+    font-size: $h1;
+    margin-left: -11rem;
+  }
+}

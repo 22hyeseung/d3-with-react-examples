@@ -6,7 +6,7 @@ import { extent } from 'd3-array'
 import { axisBottom, axisLeft } from 'd3-axis'
 import { line } from 'd3-shape'
 import PropTypes from 'prop-types'
-import 'scss/components/lineGraph.scss'
+import 'scss/components/subLineGraph.scss'
 import Map from 'lodash/map'
 
 const LineGraph = props => {
@@ -31,34 +31,29 @@ const LineGraph = props => {
 
   const xAxis = axisBottom()
     .scale(xScale)
-    .ticks(7)
+    .ticks(6)
+    .tickSize(4)
 
   const yAxis = axisLeft()
     .scale(yScale)
     .ticks(5)
+    .tickSize(4)
 
   const selectScaledX = data => xScale(props.selectX(data))
   const selectScaledY = data => yScale(props.selectY(data))
 
-  const sparkLine = line()
+  const subLinearLine = line()
     .x(selectScaledX)
     .y(selectScaledY)
 
-  const linePath = sparkLine(chartData)
-  // const circlePoints = chartData.map(data => ({
-  //   x: selectScaledX(data),
-  //   y: selectScaledY(data),
-  // }))
+  const linePath = subLinearLine(chartData)
 
   return (
     <svg
-      className="Graph-container"
+      className="subGraph-container"
       width={props.width + props.margin.left + props.margin.right}
       height={props.height + props.margin.top + props.margin.bottom}
     >
-      <text x="0" y="-35" font-size="1.5rem">
-        {props.dataKey}
-      </text>
       {/* x축 */}
       <g
         className="xAxis"

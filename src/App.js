@@ -3,13 +3,22 @@ import { SERVER_HOSTNAME } from 'config'
 import MainContainer from 'containers/MainContainer'
 import SubContainer from 'containers/SubContainer'
 import './scss/main.scss'
+import PickBy from 'lodash/pickBy'
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      data: [],
+      fullData: [],
       errorState: false,
+      isMain: {
+        score: true,
+        co2: false,
+        dust: false,
+        temp: false,
+        humid: false,
+        voc: false,
+      },
     }
   }
 
@@ -18,7 +27,7 @@ class App extends Component {
       .then(res => res.json())
       .then(data => {
         this.setState({
-          data,
+          fullData: data,
         })
       })
       .catch(err => {
@@ -28,17 +37,31 @@ class App extends Component {
       })
   }
 
+  changeMainGraph = keyName => {
+    this.setState({
+      mainData: keyName,
+    })
+  }
+
   render() {
     if (this.state.errorState) {
       return <h1>네트워크 요청 중 에러가 발생하였습니다.</h1>
     }
-    if (!this.state.data.length) {
+    if (!this.state.fullData.length) {
       return null
     }
+
+    // main 그래프의 data key
+    const mainDataKey = Object.keys(
+      PickBy(this.state.isMain, function isTrue(value) {
+        return value
+      }),
+    )[0]
+
     return (
       <div className="App">
-        <MainContainer data={this.state.data} />
-        <SubContainer data={this.state.data} />
+        <MainContainer data={this.state.fullData} dataKey={mainDataKey} />
+        <SubContainer data={this.state.fullData} dataKey={mainDataKey} />
       </div>
     )
   }
