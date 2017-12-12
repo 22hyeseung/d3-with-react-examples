@@ -13,6 +13,7 @@ class App extends Component {
       fullData: [],
       errorState: false,
       isMain: {
+        // 현재 메인 그래프의 데이터
         score: true,
         co2: false,
         dust: false,
@@ -24,6 +25,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // get Data
     fetch(`${SERVER_HOSTNAME}/data`)
       .then(res => res.json())
       .then(data => {
@@ -38,6 +40,7 @@ class App extends Component {
       })
   }
 
+  // 서브 그래프에서 클릭 이벤트 발생 시 mainData 변경
   changeMainGraph = keyName => {
     this.setState({
       mainData: keyName,
@@ -45,9 +48,11 @@ class App extends Component {
   }
 
   render() {
+    // 네트워크 오류
     if (this.state.errorState) {
       return <h1>네트워크 요청 중 에러가 발생하였습니다.</h1>
     }
+    // 데이터가 없을 경우
     if (!this.state.fullData.length) {
       return null
     }
@@ -59,12 +64,16 @@ class App extends Component {
       }),
     )[0]
 
+    // sub 그래프의 data keys
     const subDataKeys = Object.keys(
       PickBy(this.state.isMain, function isFalse(value) {
-        return !value
+        return !value // return Array
       }),
     )
 
+    // 데이터 depth를 flat하게 만드는 부분
+    // {timestamp, score, sensor{co2, dust, temp, humid, voc}}
+    // => {timestamp, score, co2, dust, temp, humid, voc}
     const flatData = this.state.fullData
     Map(this.state.fullData, (el, i, arr) => {
       flatData[i] = {
