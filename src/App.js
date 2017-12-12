@@ -4,6 +4,7 @@ import MainContainer from 'containers/MainContainer'
 import SubContainer from 'containers/SubContainer'
 import './scss/main.scss'
 import PickBy from 'lodash/pickBy'
+import Map from 'lodash/map'
 
 class App extends Component {
   constructor(props) {
@@ -58,10 +59,29 @@ class App extends Component {
       }),
     )[0]
 
+    const subDataKeys = Object.keys(
+      PickBy(this.state.isMain, function isFalse(value) {
+        return !value
+      }),
+    )
+
+    const flatData = this.state.fullData
+    Map(this.state.fullData, (el, i, arr) => {
+      flatData[i] = {
+        timestamp: el.timestamp,
+        score: el.score,
+        co2: el.sensor.co2,
+        dust: el.sensor.dust,
+        temp: el.sensor.temp,
+        humid: el.sensor.humid,
+        voc: el.sensor.voc,
+      }
+    })
+
     return (
       <div className="App">
-        <MainContainer data={this.state.fullData} dataKey={mainDataKey} />
-        <SubContainer data={this.state.fullData} dataKey={mainDataKey} />
+        <MainContainer data={flatData} dataKey={mainDataKey} />
+        <SubContainer data={flatData} dataKey={subDataKeys} />
       </div>
     )
   }

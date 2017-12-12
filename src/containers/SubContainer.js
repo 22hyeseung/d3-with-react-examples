@@ -1,83 +1,30 @@
-import React, { Component } from 'react'
+import React from 'react'
 import SubLineGraph from 'components/SubLineGraph'
 
-class SubContainer extends Component {
-  render() {
-    return (
-      <div>
-        <SubLineGraph
-          data={this.props.data}
-          selectX={data => data.timestamp}
-          selectY={data => data[this.props.dataKey]}
-          dataKey={this.props.dataKey}
-          width={125}
-          height={60}
-          margin={{
-            top: 10,
-            right: 0,
-            bottom: 20,
-            left: 20,
-          }}
-        />
-        <SubLineGraph
-          data={this.props.data}
-          selectX={data => data.timestamp}
-          selectY={data => data[this.props.dataKey]}
-          dataKey={this.props.dataKey}
-          width={145}
-          height={60}
-          margin={{
-            top: 10,
-            right: 0,
-            bottom: 20,
-            left: 20,
-          }}
-        />
-        <SubLineGraph
-          data={this.props.data}
-          selectX={data => data.timestamp}
-          selectY={data => data[this.props.dataKey]}
-          dataKey={this.props.dataKey}
-          width={145}
-          height={60}
-          margin={{
-            top: 10,
-            right: 0,
-            bottom: 20,
-            left: 20,
-          }}
-        />
-        <SubLineGraph
-          data={this.props.data}
-          selectX={data => data.timestamp}
-          selectY={data => data[this.props.dataKey]}
-          dataKey={this.props.dataKey}
-          width={145}
-          height={60}
-          margin={{
-            top: 10,
-            right: 0,
-            bottom: 20,
-            left: 20,
-          }}
-        />
-        <SubLineGraph
-          data={this.props.data}
-          selectX={data => data.timestamp}
-          selectY={data => data[this.props.dataKey]}
-          dataKey={this.props.dataKey}
-          width={145}
-          height={60}
-          margin={{
-            top: 10,
-            right: 0,
-            bottom: 20,
-            left: 20,
-          }}
-        />
-      </div>
-    )
-  }
+const SubContainer = props => {
+  return (
+    <div>
+      {props.dataKey.map((el, i) => {
+        return (
+          <SubLineGraph
+            key={i}
+            data={props.data}
+            selectX={data => data.timestamp}
+            selectY={data => data[el]}
+            dataKey={el}
+            width={145}
+            height={60}
+            margin={{
+              top: 10,
+              right: 0,
+              bottom: 20,
+              left: 20,
+            }}
+          />
+        )
+      })}
+    </div>
+  )
 }
 
 export default SubContainer

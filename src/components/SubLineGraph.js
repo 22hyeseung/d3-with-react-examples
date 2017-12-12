@@ -9,8 +9,7 @@ import PropTypes from 'prop-types'
 import 'scss/components/subLineGraph.scss'
 import Map from 'lodash/map'
 
-const LineGraph = props => {
-  // const node = this.node
+const SubLineGraph = props => {
   const dataKey = props.dataKey
   let chartData = []
   Map(props.data, (el, i) => {
@@ -19,7 +18,6 @@ const LineGraph = props => {
     }
     chartData[i][dataKey] = el[dataKey]
   })
-
   // x축 (timestamp) 구간 범위 정의 = width만큼
   const xScale = scaleTime()
     .domain(extent(chartData, props.selectX)) // 실제 데이터 범위
@@ -72,8 +70,8 @@ const LineGraph = props => {
   )
 }
 
-LineGraph.propTypes = {
+SubLineGraph.propTypes = {
   height: PropTypes.number,
   width: PropTypes.number,
 }
-export default LineGraph
+export default SubLineGraph

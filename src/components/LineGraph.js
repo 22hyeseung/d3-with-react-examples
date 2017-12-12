@@ -56,7 +56,7 @@ const LineGraph = props => {
       width={props.width + props.margin.left + props.margin.right}
       height={props.height + props.margin.top + props.margin.bottom}
     >
-      <text x="0" y="-35" font-size="1.5rem">
+      <text x="0" y="-35" fontSize="1.5rem">
         {props.dataKey}
       </text>
       {/* x축 */}
