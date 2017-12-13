@@ -11,7 +11,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      fullData: [],
+      rawData: [],
       errorState: false,
       isMain: {
         // 현재 메인 그래프의 데이터
@@ -31,7 +31,7 @@ class App extends Component {
       .then(res => res.json())
       .then(data => {
         this.setState({
-          fullData: data,
+          rawData: data,
         })
       })
       .catch(err => {
@@ -49,7 +49,9 @@ class App extends Component {
     })
     // 클릭한 그래프를 true로
     isMain[keyName] = true
-    console.log(isMain)
+    this.setState({
+      isMain,
+    })
   }
 
   render() {
@@ -58,7 +60,7 @@ class App extends Component {
       return <h1>네트워크 요청 중 에러가 발생하였습니다.</h1>
     }
     // 데이터가 없을 경우
-    if (!this.state.fullData.length) {
+    if (!this.state.rawData.length) {
       return null
     }
 
@@ -79,18 +81,21 @@ class App extends Component {
     // 데이터 depth를 flat하게 만드는 부분
     // {timestamp, score, sensor{co2, dust, temp, humid, voc}}
     // => {timestamp, score, co2, dust, temp, humid, voc}
-    const flatData = this.state.fullData
-    Map(this.state.fullData, (el, i, arr) => {
-      flatData[i] = {
-        timestamp: el.timestamp,
-        score: el.score,
-        co2: el.sensor.co2,
-        dust: el.sensor.dust,
-        temp: el.sensor.temp,
-        humid: el.sensor.humid,
-        voc: el.sensor.voc,
-      }
-    })
+    const flatData = this.state.rawData
+    if (flatData[0].sensor) {
+      // 가공 되지 않은 상태이면 (첫 로드일 때,)
+      Map(flatData, (el, i) => {
+        flatData[i] = {
+          timestamp: el.timestamp,
+          score: el.score,
+          co2: el.sensor.co2,
+          dust: el.sensor.dust,
+          temp: el.sensor.temp,
+          humid: el.sensor.humid,
+          voc: el.sensor.voc,
+        }
+      })
+    }
 
     return (
       <div className="App">
