@@ -1,41 +1,17 @@
 @import '../utils/variables';
+@import '../utils/mixin';
 
 .Graph-main-container {
-  background: #fff;
-  box-shadow: $box-shadow;
-  padding: 5rem 0rem 2.5rem 3.5rem;
-  // margin: 3rem;
-  .xAxis {
-    line {
-      stroke: $deep-dark-gray;
-      stroke-width: $main-stroke-width;
-    }
-    path {
-      stroke: $deep-dark-gray;
-      stroke-width: $main-stroke-width;
-    }
-    text {
-      font-size: $main-font-size;
-    }
-  }
-  .yAxis {
-    line {
-      stroke: $deep-dark-gray;
-      stroke-width: $main-stroke-width;
-    }
-    path {
-      stroke: $deep-dark-gray;
-      stroke-width: $main-stroke-width;
-    }
-    text {
-      font-size: $main-font-size;
-    }
-  }
-  .line {
-    path {
-      fill: transparent;
-      stroke: $primary-color;
-      stroke-width: 1.8;
+  @include graph-container(5rem 0rem 2.5rem 3.5rem, $main-stroke-width, $main-font-size);
+}
+
+.mouse-over-effects {
+  .mouse-line {
+    @include mouse-effect-path(2px);
+    .mouse-per-line {
+      circle {
+        opacity: 0;
+      }
     }
   }
 }

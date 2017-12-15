@@ -1,0 +1,44 @@
+@mixin graph-container($padding, $stroke-width, $font-size) {
+  background: #fff;
+  box-shadow: $box-shadow;
+  padding: $padding;
+  .xAxis {
+    line {
+      stroke: $deep-dark-gray;
+      stroke-width: $stroke-width;
+    }
+    path {
+      stroke: $deep-dark-gray;
+      stroke-width: $stroke-width;
+    }
+    text {
+      font-size: $font-size;
+    }
+  }
+  .yAxis {
+    line {
+      stroke: $deep-dark-gray;
+      stroke-width: $stroke-width;
+    }
+    path {
+      stroke: $deep-dark-gray;
+      stroke-width: $stroke-width;
+    }
+    text {
+      font-size: $font-size;
+    }
+  }
+  .line {
+    path {
+      fill: transparent;
+      stroke: $primary-color;
+      stroke-width: $stroke-width;
+    }
+  }
+}
+
+@mixin mouse-effect-path($stroke-width) {
+  stroke: $deep-dark-gray;
+  stroke-width: $stroke-width;
+  opacity: 0;
+}

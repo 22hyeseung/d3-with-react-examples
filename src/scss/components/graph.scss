@@ -1,2 +1,8 @@
 @import 'mainGraph';
 @import 'subGraph';
+
+.mouse-line {
+  stroke: $dark-gray;
+  stroke-width: 1px;
+  opacity: 0;
+}
