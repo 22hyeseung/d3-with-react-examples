@@ -1,9 +1,17 @@
 @import '../utils/variables';
 @import '../utils/mixin';
 
-.Graph-sub-container {
-  cursor: pointer;
-  @include graph-container(1.5rem 0rem 0rem 2rem,$sub-stroke-width,$sub-font-size);
+div {
+  text-align: center;
+  .Graph-sub-container {
+    cursor: pointer;
+    @include graph-container(1.5rem 0rem 0rem 2rem,$sub-stroke-width,$sub-font-size);
+  }
+
+  .Graph-sub-labels {
+    color: $deep-dark-gray;
+    line-height: 1.8rem;
+  }
 }
 
 .mouse-over-effects {

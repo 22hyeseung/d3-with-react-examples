@@ -1,0 +1,6 @@
+/config
+/build
+/node_modules
+/public
+/scripts
+/src/registerServiceWorker.js

@@ -1,1 +1,2 @@
-export const SERVER_HOSTNAME = 'http://localhost:3001'
+const SERVER_HOSTNAME = 'http://localhost:3001';
+export default SERVER_HOSTNAME;

@@ -3,7 +3,7 @@
 
 @import 'utils/variables';
 
-.App {
+body {
   display: grid;
   width: 100%;
   background-color: #f7f7f7;
@@ -17,5 +17,5 @@
 .App-sub-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  margin: 0 3rem 3rem 3rem;
+  margin-bottom: 3rem;
 }

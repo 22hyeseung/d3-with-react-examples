@@ -1,6 +1,7 @@
-import React from 'react'
-import LineGraph from 'components/LineGraph'
-import 'scss/main.scss'
+import React from 'react';
+import LineGraph from 'components/LineGraph';
+import PropTypes from 'prop-types';
+import 'scss/main.scss';
 
 const SubContainer = props => {
   return (
@@ -10,9 +11,7 @@ const SubContainer = props => {
           <LineGraph
             changeMainGraph={props.changeMainGraph}
             main={false}
-            key={i}
             data={props.data}
-            selectX={data => data.timestamp}
             selectY={data => data[dataKey]}
             dataKey={dataKey}
             width={145}
@@ -24,10 +23,38 @@ const SubContainer = props => {
               left: 20,
             }}
           />
-        )
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
-export default SubContainer
+SubContainer.defaultProps = {
+  data: [
+    {
+      timestamp: 0,
+      score: 0,
+      co2: 0,
+      dust: 0,
+      temp: 0,
+      humid: 0,
+      voc: 0,
+    },
+  ],
+};
+
+SubContainer.propTypes = {
+  data: PropTypes.shape({
+    timestamp: PropTypes.number,
+    score: PropTypes.number,
+    co2: PropTypes.number,
+    dust: PropTypes.number,
+    temp: PropTypes.number,
+    humid: PropTypes.number,
+    voc: PropTypes.number,
+  }),
+  dataKeys: PropTypes.arrayOf.isRequired,
+  changeMainGraph: PropTypes.func.isRequired,
+};
+
+export default SubContainer;

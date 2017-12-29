@@ -1,15 +1,17 @@
-import React, { Component } from 'react'
-import { SERVER_HOSTNAME } from 'config'
-import MainContainer from 'containers/MainContainer'
-import SubContainer from 'containers/SubContainer'
-import './scss/main.scss'
-import PickBy from 'lodash/pickBy'
-import Map from 'lodash/map'
-import MapValues from 'lodash/mapValues'
+// node modules
+import React, { Component } from 'react';
+import PickBy from 'lodash/pickBy';
+import Map from 'lodash/map';
+import MapValues from 'lodash/mapValues';
+// project src
+import SERVER_HOSTNAME from 'config';
+import MainContainer from 'containers/MainContainer';
+import SubContainer from 'containers/SubContainer';
+import './scss/main.scss';
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       rawData: [],
       errorState: false,
@@ -22,7 +24,7 @@ class App extends Component {
         humid: false,
         voc: false,
       },
-    }
+    };
   }
 
   componentDidMount() {
@@ -32,56 +34,57 @@ class App extends Component {
       .then(data => {
         this.setState({
           rawData: data,
-        })
+        });
       })
       .catch(err => {
+        console.log(err);
         this.setState({
           errorState: true,
-        })
-      })
+        });
+      });
   }
 
   // 서브 그래프에서 클릭 이벤트 발생 시 mainData 변경
   changeMainGraph = keyName => {
     // false로 전체 value 초기화
-    const isMain = MapValues(this.state.isMain, val => {
-      return false
-    })
+    const isMain = MapValues(this.state.isMain, () => {
+      return false;
+    });
     // 클릭한 그래프를 true로
-    isMain[keyName] = true
+    isMain[keyName] = true;
     this.setState({
       isMain,
-    })
-  }
+    });
+  };
 
   render() {
     // 네트워크 오류
     if (this.state.errorState) {
-      return <h1>네트워크 요청 중 에러가 발생하였습니다.</h1>
+      return <h1>네트워크 요청 중 에러가 발생하였습니다.</h1>;
     }
     // 데이터가 없을 경우
     if (!this.state.rawData.length) {
-      return null
+      return null;
     }
 
     // main 그래프의 data key
     const mainDataKey = Object.keys(
-      PickBy(this.state.isMain, function isTrue(value) {
-        return value
+      PickBy(this.state.isMain, isTrue => {
+        return isTrue;
       }),
-    )[0]
+    )[0];
 
     // sub 그래프의 data keys
     const subDataKeys = Object.keys(
-      PickBy(this.state.isMain, function isFalse(value) {
-        return !value // return Array
+      PickBy(this.state.isMain, isTrue => {
+        return !isTrue; // return Array
       }),
-    )
+    );
 
     // 데이터 depth를 flat하게 만드는 부분
     // {timestamp, score, sensor{co2, dust, temp, humid, voc}}
     // => {timestamp, score, co2, dust, temp, humid, voc}
-    const flatData = this.state.rawData
+    const flatData = this.state.rawData;
     if (flatData[0].sensor) {
       // 가공 되지 않은 상태이면 (첫 로드일 때,)
       Map(flatData, (el, i) => {
@@ -93,8 +96,8 @@ class App extends Component {
           temp: el.sensor.temp,
           humid: el.sensor.humid,
           voc: el.sensor.voc,
-        }
-      })
+        };
+      });
     }
 
     return (
@@ -106,8 +109,8 @@ class App extends Component {
           changeMainGraph={this.changeMainGraph}
         />
       </div>
-    )
+    );
   }
 }
 
-export default App
+export default App;
