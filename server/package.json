@@ -4,7 +4,8 @@
   "description": "d3-with-react-example project's server",
   "main": ".eslintrc.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src",
+    "start:dev": "nodemon -w src/ src/index.js"
   },
   "author": "huusz",
   "license": "ISC",
